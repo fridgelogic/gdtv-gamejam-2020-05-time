@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 0b1438912377a91489caba30503f134e
+guid: 81b89a045727bc541918f814be0f1b37
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7164557227593946892
-    second: QuickTiles_0
+      213: 8948804525804438955
+    second: ghostwalk1_0
   - first:
-      213: -1438345368640604675
-    second: QuickTiles_1
+      213: -4610008770623530343
+    second: ghostwalk1_1
   - first:
-      213: -8605320146665585668
-    second: QuickTiles_2
+      213: -2923342217462391192
+    second: ghostwalk1_2
   - first:
-      213: 8958427460679357202
-    second: QuickTiles_3
+      213: 7985821617784911970
+    second: ghostwalk1_3
   - first:
-      213: -6610582417467255671
-    second: QuickTiles_4
+      213: 8707920620976782501
+    second: ghostwalk1_4
   - first:
-      213: -6014011322561475719
-    second: QuickTiles_5
-  - first:
-      213: -6072878215717081614
-    second: QuickTiles_6
-  - first:
-      213: 7053097303701452168
-    second: QuickTiles_7
+      213: -8933878485898766673
+    second: ghostwalk1_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -123,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: QuickTiles_0
+      name: ghostwalk1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f82e443921629c90800000000000000
-      internalID: -7164557227593946892
+      spriteID: ba54bfcad4a803c70800000000000000
+      internalID: 8948804525804438955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_1
+      name: ghostwalk1_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 14
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +152,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df539d50288f90ce0800000000000000
-      internalID: -1438345368640604675
+      spriteID: 99a9c8fa275f500c0800000000000000
+      internalID: -4610008770623530343
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_2
+      name: ghostwalk1_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 28
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86e5043edb33e67d0800000000000000
+      internalID: -2923342217462391192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ghostwalk1_3
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 14
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf34c776be2c39880800000000000000
-      internalID: -8605320146665585668
+      spriteID: 26874bf537653de60800000000000000
+      internalID: 7985821617784911970
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_3
+      name: ghostwalk1_4
       rect:
         serializedVersion: 2
-        x: 48
+        x: 56
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,97 +215,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 213d5ebcf4ab25c70800000000000000
-      internalID: 8958427460679357202
+      spriteID: 5acbe911bafb8d870800000000000000
+      internalID: 8707920620976782501
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_4
+      name: ghostwalk1_5
       rect:
         serializedVersion: 2
-        x: 64
+        x: 70
         y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: -8}
-        - {x: -8, y: 8}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 984db60d05e7244a0800000000000000
-      internalID: -6610582417467255671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QuickTiles_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        width: 14
+        height: 19
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97bcb83d090f98ca0800000000000000
-      internalID: -6014011322561475719
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QuickTiles_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2fda9f3307dc8bba0800000000000000
-      internalID: -6072878215717081614
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QuickTiles_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 885f369f0a2a1e160800000000000000
-      internalID: 7053097303701452168
+      spriteID: fa6df7dc9dc740480800000000000000
+      internalID: -8933878485898766673
       vertices: []
       indices: 
       edges: []

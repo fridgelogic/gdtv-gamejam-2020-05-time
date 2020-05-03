@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 0b1438912377a91489caba30503f134e
+guid: 446588516fb7d58449762208a8a431c1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7164557227593946892
-    second: QuickTiles_0
+      213: 8158422997318249092
+    second: thisghostcanrun1_0
   - first:
-      213: -1438345368640604675
-    second: QuickTiles_1
+      213: -6446007509368686043
+    second: thisghostcanrun1_1
   - first:
-      213: -8605320146665585668
-    second: QuickTiles_2
+      213: 5935192408696527415
+    second: thisghostcanrun1_2
   - first:
-      213: 8958427460679357202
-    second: QuickTiles_3
+      213: 756087250203524881
+    second: thisghostcanrun1_3
   - first:
-      213: -6610582417467255671
-    second: QuickTiles_4
+      213: -7881494136452464738
+    second: thisghostcanrun1_4
   - first:
-      213: -6014011322561475719
-    second: QuickTiles_5
+      213: 3945347403370891629
+    second: thisghostcanrun1_5
   - first:
-      213: -6072878215717081614
-    second: QuickTiles_6
+      213: 7466031386131162193
+    second: thisghostcanrun1_6
   - first:
-      213: 7053097303701452168
-    second: QuickTiles_7
+      213: 2233123748662195639
+    second: thisghostcanrun1_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -123,174 +123,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: QuickTiles_0
+      name: thisghostcanrun1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f82e443921629c90800000000000000
-      internalID: -7164557227593946892
+      spriteID: 48a288aad7a883170800000000000000
+      internalID: 8158422997318249092
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_1
+      name: thisghostcanrun1_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 14
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df539d50288f90ce0800000000000000
-      internalID: -1438345368640604675
+      spriteID: 52a3498925e2b86a0800000000000000
+      internalID: -6446007509368686043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_2
+      name: thisghostcanrun1_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 28
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cf34c776be2c39880800000000000000
-      internalID: -8605320146665585668
+      spriteID: 73a93f9bc0a0e5250800000000000000
+      internalID: 5935192408696527415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_3
+      name: thisghostcanrun1_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 42
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 213d5ebcf4ab25c70800000000000000
-      internalID: 8958427460679357202
+      spriteID: 11f359f19592e7a00800000000000000
+      internalID: 756087250203524881
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_4
+      name: thisghostcanrun1_4
       rect:
         serializedVersion: 2
-        x: 64
+        x: 56
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -8, y: 8}
-        - {x: -8, y: -8}
-        - {x: 8, y: -8}
-        - {x: 8, y: -8}
-        - {x: -8, y: 8}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 984db60d05e7244a0800000000000000
-      internalID: -6610582417467255671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: QuickTiles_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97bcb83d090f98ca0800000000000000
-      internalID: -6014011322561475719
+      spriteID: e9f3d6147de4f9290800000000000000
+      internalID: -7881494136452464738
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_6
+      name: thisghostcanrun1_5
       rect:
         serializedVersion: 2
-        x: 96
+        x: 70
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fda9f3307dc8bba0800000000000000
-      internalID: -6072878215717081614
+      spriteID: d698e6d5f80b0c630800000000000000
+      internalID: 3945347403370891629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: QuickTiles_7
+      name: thisghostcanrun1_6
       rect:
         serializedVersion: 2
-        x: 112
+        x: 84
         y: 0
-        width: 16
-        height: 16
+        width: 14
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 885f369f0a2a1e160800000000000000
-      internalID: 7053097303701452168
+      spriteID: 154e34c2dfbac9760800000000000000
+      internalID: 7466031386131162193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thisghostcanrun1_7
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 0
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b5bf72c736adfe10800000000000000
+      internalID: 2233123748662195639
       vertices: []
       indices: 
       edges: []
