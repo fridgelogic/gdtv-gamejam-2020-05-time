@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /*
     Based on the work of Sebastian Lague
@@ -9,46 +7,23 @@ using UnityEngine;
 
 namespace FridgeLogic.Movement
 {
-    [RequireComponent(typeof(BoxCollider2D))]
-    public class PlatformerCollider2d : MonoBehaviour
+    public class PlatformerCollider2d : RaycastCollider2D
     {
         #region Inspector Fields
-            [SerializeField]
-            [Min(0)]
-            private int assetsPixelsPerUnit = 100;
+        [SerializeField]
+        [Range(0, 90)]
+        private float maxClimbingAngle = 60f;
 
-            [SerializeField]
-            [Range(2, 64)]
-            private int horizontalRayCount = 4;
-
-            [SerializeField]
-            [Range(2, 64)]
-            private int verticalRayCount = 4;
-
-            [SerializeField]
-            [Range(0, 90)]
-            private float maxClimbingAngle = 60f;
-
-            [SerializeField]
-            [Range(0, 90)]
-            private float maxDescendingAngle = 60f;
-
-            [SerializeField]
-            private LayerMask layerMask = default(LayerMask);
+        [SerializeField]
+        [Range(0, 90)]
+        private float maxDescendingAngle = 60f;
         #endregion
 
         // Public Properties
         public CollisionInfo CollisionInfo => collisionInfo;
 
-        // Component References
-        private BoxCollider2D boxCollider = null;
-
-        // Calculated Values
-        private RaycastOrigins raycastOrigins;
+        // Calculated Fields
         private CollisionInfo collisionInfo;
-        private float colliderInset;
-        private float horizontalRaySpacing;
-        private float verticalRaySpacing;
         private Vector2 unmodifiedVelocity;
 
         public Vector2 UpdateCollisions(Vector2 velocity)
@@ -75,7 +50,7 @@ namespace FridgeLogic.Movement
         private Vector2 CalculateHorizontalCollisions(Vector2 velocity)
         {
             var direction = Mathf.Sign(velocity.x);
-            var rayLength = Mathf.Abs(velocity.x) + colliderInset;
+            var rayLength = Mathf.Abs(velocity.x) + ColliderInset;
             var raysInfo = (direction < 0) ? CalculateRaysLeft(rayLength) : CalculateRaysRight(rayLength);
             var checkSlope = true;
 
@@ -104,7 +79,7 @@ namespace FridgeLogic.Movement
                             // We're still moving toward the slope,
                             // make sure we move onto it fully before starting
                             // to climb
-                            distanceToSlope = rayInfo.hit.distance - colliderInset;
+                            distanceToSlope = rayInfo.hit.distance - ColliderInset;
                             velocity.x -= distanceToSlope * direction;
                         }
 
@@ -127,7 +102,7 @@ namespace FridgeLogic.Movement
                     if (!collisionInfo.climbingSlope || slope > maxClimbingAngle)
                     {
                         // We're not climbing a slope
-                        velocity.x = (rayInfo.hit.distance - colliderInset) * direction;
+                        velocity.x = (rayInfo.hit.distance - ColliderInset) * direction;
 
                         // If we detect an unclimbable slope to the side while
                         // climbing a slope, make sure the y velocity reflects that
@@ -152,7 +127,7 @@ namespace FridgeLogic.Movement
         private Vector2 CalculateVerticalCollisions(Vector2 velocity)
         {
             var direction = Mathf.Sign(velocity.y);
-            var rayLength = Mathf.Abs(velocity.y) + colliderInset;
+            var rayLength = Mathf.Abs(velocity.y) + ColliderInset;
             var originAdjustment = new Vector2(velocity.x, 0);
             var raysInfo = (direction < 0) ? CalculateRaysDown(rayLength, originAdjustment) : CalculateRaysUp(rayLength, originAdjustment);
             foreach (var rayInfo in raysInfo)
@@ -161,7 +136,7 @@ namespace FridgeLogic.Movement
                 {
                     Debug.DrawRay(rayInfo.ray.origin, Vector2.up * direction * rayInfo.hit.distance, Color.red);
 
-                    velocity.y = (rayInfo.hit.distance - colliderInset) * direction;
+                    velocity.y = (rayInfo.hit.distance - ColliderInset) * direction;
 
                     if (collisionInfo.climbingSlope)
                     {
@@ -178,8 +153,8 @@ namespace FridgeLogic.Movement
             {
                 // Fire a horizontal ray in the direction we're moving
                 var directionX = Mathf.Sign(velocity.x);
-                rayLength = Mathf.Abs(velocity.x) + colliderInset;
-                var origin = (directionX < 0) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
+                rayLength = Mathf.Abs(velocity.x) + ColliderInset;
+                var origin = (directionX < 0) ? RaycastOrigins.bottomLeft : RaycastOrigins.bottomRight;
                 // Cast from our next height
                 origin += Vector2.up * velocity.y;
                 var hit = Physics2D.Raycast(origin, Vector2.right * directionX, rayLength, layerMask);
@@ -190,7 +165,7 @@ namespace FridgeLogic.Movement
                     if (slope != collisionInfo.slope)
                     {
                         // We are about to step onto a different angled slope
-                        var distanceToSlope = hit.distance - colliderInset;
+                        var distanceToSlope = hit.distance - ColliderInset;
                         velocity.x = distanceToSlope * directionX;
                         collisionInfo.slope = slope;
                     }
@@ -221,7 +196,7 @@ namespace FridgeLogic.Movement
         private Vector2 CalculateSlopeDescentVelocity(Vector2 velocity)
         {
             var direction = Mathf.Sign(velocity.x);
-            var rayOrigin = (direction < 0) ? raycastOrigins.bottomRight : raycastOrigins.bottomLeft;
+            var rayOrigin = (direction < 0) ? RaycastOrigins.bottomRight : RaycastOrigins.bottomLeft;
             var hit = Physics2D.Raycast(rayOrigin, Vector2.down, Mathf.Infinity, layerMask);
 
             if (hit)
@@ -234,7 +209,7 @@ namespace FridgeLogic.Movement
                     {
                         // Check how far we are from the slope
                         var distanceToSlope = Mathf.Tan(slope * Mathf.Deg2Rad) * Mathf.Abs(velocity.x);
-                        if ((hit.distance - colliderInset) <= distanceToSlope)
+                        if ((hit.distance - ColliderInset) <= distanceToSlope)
                         {
                             // Trig: Hypotenuse
                             var moveDistance = Mathf.Abs(velocity.x);
@@ -254,213 +229,6 @@ namespace FridgeLogic.Movement
 
             return velocity;
         }
-
-        private void CalculateColliderInset()
-        {
-            // Inset by 1 pixel
-            colliderInset = 1f / assetsPixelsPerUnit;
-        }
-
-        private void UpdateRaycastOrigins()
-        {
-            var bounds = boxCollider.bounds;
-            // Apply the collider inset
-            bounds.Expand(colliderInset * -2);
-            raycastOrigins = new RaycastOrigins(bounds);
-        }
-
-        private void CalculateRaySpacing()
-        {
-            var bounds = boxCollider.bounds;
-            // Apply the collider inset
-            bounds.Expand(colliderInset * -2);
-            horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
-            verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
-        }
-
-        private IEnumerable<RayInfo2D> CalculateRaysUp(float maxRayLength = 1f, Vector2? originAdjustment = null)
-        {
-            var adjust = originAdjustment ?? Vector2.zero;
-            return CalculateRays(verticalRayCount, raycastOrigins.topLeft + adjust, Vector2.right, verticalRaySpacing, Vector2.up, layerMask, maxRayLength);
-        }
-
-        private IEnumerable<RayInfo2D> CalculateRaysDown(float maxRayLength = 1f, Vector2? originAdjustment = null)
-        {
-            var adjust = originAdjustment ?? Vector2.zero;
-            return CalculateRays(verticalRayCount, raycastOrigins.bottomLeft + adjust, Vector2.right, verticalRaySpacing, Vector2.down, layerMask, maxRayLength);
-        }
-
-        private IEnumerable<RayInfo2D> CalculateRaysLeft(float maxRayLength = 1f, Vector2? originAdjustment = null)
-        {
-            var adjust = originAdjustment ?? Vector2.zero;
-            return CalculateRays(horizontalRayCount, raycastOrigins.bottomLeft + adjust, Vector2.up, horizontalRaySpacing, Vector2.left, layerMask, maxRayLength);
-        }
-
-        private IEnumerable<RayInfo2D> CalculateRaysRight(float maxRayLength = 1f, Vector2? originAdjustment = null)
-        {
-            var adjust = originAdjustment ?? Vector2.zero;
-            return CalculateRays(horizontalRayCount, raycastOrigins.bottomRight + adjust, Vector2.up, horizontalRaySpacing, Vector2.right, layerMask, maxRayLength);
-        }
-
-        private static IEnumerable<RayInfo2D> CalculateRays(
-            int rayCount,
-            Vector2 origin,
-            Vector2 spacingDirection,
-            float spacing,
-            Vector2 direction,
-            LayerMask layerMask,
-            float maxRayLength)
-        {
-            var rayLength = maxRayLength;
-
-            for (int i = 0; i < rayCount; i++)
-            {
-                var from = origin + spacingDirection * spacing * i;
-                var hit = Physics2D.Raycast(
-                    origin: from,
-                    direction: direction,
-                    distance: rayLength,
-                    layerMask: layerMask
-                );
-
-                if (hit)
-                {
-                    rayLength = hit.distance;
-                }
-
-                yield return new RayInfo2D(
-                    origin: from,
-                    direction: direction,
-                    hit: hit
-                );
-            }
-        }
-
-        #region Unity Lifecycle
-        private void Start()
-        {
-            boxCollider = GetComponent<BoxCollider2D>();
-            CalculateColliderInset();
-            CalculateRaySpacing();
-        }
-        #endregion
-
-        #region Editor
-        private void OnDrawGizmosSelected()
-        {
-            if (!Application.isPlaying)
-            {
-                boxCollider = GetComponent<BoxCollider2D>();
-                CalculateColliderInset();
-                UpdateRaycastOrigins();
-                CalculateRaySpacing();
-            }
-
-            foreach (var rayInfo in CalculateRaysDown())
-            {
-                if (rayInfo.hit)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction * rayInfo.hit.distance);
-                }
-                else
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction);
-                }
-            }
-
-            foreach (var rayInfo in CalculateRaysUp())
-            {
-                if (rayInfo.hit)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction * rayInfo.hit.distance);
-                }
-                else
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction);
-                }
-            }
-
-            foreach (var rayInfo in CalculateRaysLeft())
-            {
-                if (rayInfo.hit)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction * rayInfo.hit.distance);
-                }
-                else
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction);
-                }
-            }
-
-            foreach (var rayInfo in CalculateRaysRight())
-            {
-                if (rayInfo.hit)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction * rayInfo.hit.distance);
-                }
-                else
-                {
-                    Gizmos.color = Color.green;
-                    Gizmos.DrawRay(rayInfo.ray.origin, rayInfo.ray.direction);
-                }
-            }
-        }
-        #endregion
-
-        #region RaycastOrigins
-        private struct RaycastOrigins
-        {
-            public Vector2 topLeft;
-            public Vector2 topRight;
-            public Vector2 bottomLeft;
-            public Vector2 bottomRight;
-
-            public RaycastOrigins(Vector2 topLeft, Vector2 topRight, Vector2 bottomLeft, Vector2 bottomRight)
-            {
-                this.topLeft = topLeft;
-                this.topRight = topRight;
-                this.bottomLeft = bottomLeft;
-                this.bottomRight = bottomRight;
-            }
-
-            public RaycastOrigins(Bounds bounds)
-            {
-                topLeft = new Vector2(bounds.min.x, bounds.max.y);
-                topRight = bounds.max;
-                bottomLeft = bounds.min;
-                bottomRight = new Vector2(bounds.max.x, bounds.min.y);
-            }
-
-            public void SetToBounds(Bounds bounds)
-            {
-                topLeft = new Vector2(bounds.min.x, bounds.max.y);
-                topRight = bounds.max;
-                bottomLeft = bounds.min;
-                bottomRight = new Vector2(bounds.max.x, bounds.min.y);
-            }
-        }
-        #endregion
-
-        #region RayInfo2D
-        private struct RayInfo2D
-        {
-            public Ray2D ray;
-            public RaycastHit2D hit;
-
-            public RayInfo2D(Vector2 origin, Vector2 direction, RaycastHit2D hit)
-            {
-                ray = new Ray2D(origin, direction);
-                this.hit = hit;
-            }
-        }
-        #endregion
     }
 
     #region CollisionInfo

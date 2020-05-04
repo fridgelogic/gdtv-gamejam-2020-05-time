@@ -6,24 +6,24 @@ namespace FridgeLogic.Movement
     public class PlatformerMovement : MonoBehaviour, IMovement2D
     {
         #region Inspector Fields
-            [SerializeField]
-            private float groundSpeed = 12f;
+        [SerializeField]
+        private float groundSpeed = 12f;
 
-            [SerializeField]
-            [Min(0)]
-            private float jumpHeight = 4f;
+        [SerializeField]
+        [Min(0)]
+        private float jumpHeight = 4f;
 
-            [SerializeField]
-            [Min(0)]
-            private float timeToJumpApex = 0.4f;
+        [SerializeField]
+        [Min(0)]
+        private float timeToJumpApex = 0.4f;
 
-            [SerializeField]
-            [Min(0)]
-            private float accelerationTimeInAir = 0.2f;
-            
-            [SerializeField]
-            [Min(0)]
-            private float accelerationTimeOnGround = 0.1f;
+        [SerializeField]
+        [Min(0)]
+        private float accelerationTimeInAir = 0.2f;
+        
+        [SerializeField]
+        [Min(0)]
+        private float accelerationTimeOnGround = 0.1f;
         #endregion
 
         public Vector2 CurrentMovement { get; private set; }
@@ -106,14 +106,18 @@ namespace FridgeLogic.Movement
         // TODO These are moving
 
 
-        private void UpdateHorizontalFacing(float horizontalFacing)
+        private void UpdateAnimator()
         {
-            GetComponent<Animator>().SetFloat("FacingX", horizontalFacing);
-        }
-
-        private void UpdateHorizontalSpeed(float horizontalSpeed)
-        {
-            GetComponent<Animator>().SetFloat("HorizontalSpeed", horizontalSpeed);
+            var animator = GetComponent<Animator>();
+            if (Mathf.Abs(CurrentMovement.x) >= 0.001)
+            {
+                animator.SetFloat("FacingX", Mathf.Sign(CurrentMovement.x));
+                animator.SetBool("IsWalking", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalking", false);
+            }
         }
         #endregion
 
@@ -128,7 +132,7 @@ namespace FridgeLogic.Movement
                 platformerCollider = GetComponent<PlatformerCollider2d>();
             }
 
-            private void FixedUpdate()
+            private void Update()
             {
                 ResetVelocity();
                 HandleJump();
@@ -137,8 +141,7 @@ namespace FridgeLogic.Movement
                 CurrentMovement = platformerCollider.UpdateCollisions(translation);
                 transform.Translate(CurrentMovement);
 
-                UpdateHorizontalFacing(Mathf.Sign(velocity.x));
-                UpdateHorizontalSpeed(Mathf.Abs(CurrentMovement.x) > 0 ? Mathf.Abs(velocity.x) : 0f);
+                UpdateAnimator();
             }
         #endregion
     }
