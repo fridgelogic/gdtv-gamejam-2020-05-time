@@ -16,7 +16,7 @@ TagManager:
   - Player
   - Terrain
   - Pickups
-  - 
+  - Background
   - 
   - 
   - 
@@ -47,9 +47,12 @@ TagManager:
   - name: Terrain
     uniqueID: 812998357
     locked: 0
-  - name: Foreground
-    uniqueID: 2565718719
+  - name: Pickup
+    uniqueID: 1037896633
     locked: 0
   - name: Player
     uniqueID: 432324199
+    locked: 0
+  - name: Foreground
+    uniqueID: 2565718719
     locked: 0

@@ -46,6 +46,14 @@ namespace FridgeLogic.TimeLimit
             timerProgress = timeFactor - (nextTimerTick - Time.time);
         }
 
+        public void ResetTimer()
+        {
+            PauseTimer();
+            timerProgress = 0f;
+            timeLimit.Value = timeLimit.OriginalValue;
+            StartTimer();
+        }
+
         private IEnumerator RunTimer()
         {
             while (timeLimit.Value > 0)

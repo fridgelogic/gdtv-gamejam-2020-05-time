@@ -12,19 +12,33 @@ namespace FridgeLogic.GameStateManagement
         private GameEvent gameOver = null;
 
         [SerializeField]
+        private GameEvent quitGame = null;
+
+        [SerializeField]
         private GameEvent gamePaused = null;
 
         [SerializeField]
         private GameEvent gameUnpaused = null;
 
         private bool isGamePaused;
+        private float originalTimeScale;
 
         public void StartGame()
         {
             gameStarted.Raise();
         }
 
-        public void EndGame()
+        public void QuitGame()
+        {
+            quitGame.Raise();
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+        }
+
+        public void GameOver()
         {
             gameOver.Raise();
         }
@@ -35,10 +49,13 @@ namespace FridgeLogic.GameStateManagement
 
             if (isGamePaused)
             {
+                originalTimeScale = Time.timeScale;
+                Time.timeScale = 0;
                 gamePaused.Raise();
             }
             else
             {
+                Time.timeScale = originalTimeScale;
                 gameUnpaused.Raise();
             }
         }

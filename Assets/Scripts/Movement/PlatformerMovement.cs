@@ -104,8 +104,6 @@ namespace FridgeLogic.Movement
 
         #region Animations
         // TODO These are moving
-
-
         private void UpdateAnimator()
         {
             var animator = GetComponent<Animator>();

@@ -12,6 +12,8 @@ namespace FridgeLogic.ScriptableObjects.Values
         [NonSerialized]
         private int delta = 0;
 
+        public int OriginalValue => defaultValue;
+
         public int Value
         {
             get => defaultValue + delta;
