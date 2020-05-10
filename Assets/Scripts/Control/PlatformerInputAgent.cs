@@ -16,8 +16,22 @@ namespace FridgeLogic.Control
 
         private void ProcessJump()
         {
-            // todo: hold?
-            movement.Jump();
+            movement.StartJump();
+        }
+
+        private void CancelJump()
+        {
+            movement.StopJump();
+        }
+
+        private void StartRun()
+        {
+            movement.StartRunning();
+        }
+
+        private void StopRun()
+        {
+            movement.StopRunning();
         }
 
         #region Input Events
@@ -31,6 +45,22 @@ namespace FridgeLogic.Control
             if (context.performed)
             {
                 ProcessJump();
+            }
+            else if (context.canceled)
+            {
+                CancelJump();
+            }
+        }
+
+        public void OnHoldShiftMoveSpeed(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                StartRun();
+            }
+            else if (context.canceled)
+            {
+                StopRun();
             }
         }
         #endregion

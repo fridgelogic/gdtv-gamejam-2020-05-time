@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4442789945374831982}
   - component: {fileID: 4442789945374831981}
   - component: {fileID: 4442789945374831983}
+  - component: {fileID: 4442789945374831984}
   - component: {fileID: 4442789945374831985}
   - component: {fileID: 4442789945374831986}
   - component: {fileID: 4442789945374831987}
-  - component: {fileID: 4442789945374831984}
   - component: {fileID: 4442789945374831988}
   - component: {fileID: 6468638067844752735}
   - component: {fileID: 6992768083906968847}
@@ -117,6 +117,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.74442697, y: 2.2486188}
   m_EdgeRadius: 0
+--- !u!95 &4442789945374831984
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442789945374831980}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f03a5d4a51b035842b4d56712529b08d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4442789945374831985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,30 +180,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9c99be4a3be454e8387b4d3658b8ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundSpeed: 24
+  groundSpeed: 18
+  runSpeedModifier: 1.5
   jumpHeight: 8
   timeToJumpApex: 0.4
-  accelerationTimeInAir: 0.2
-  accelerationTimeOnGround: 0.08
---- !u!95 &4442789945374831984
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442789945374831980}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f03a5d4a51b035842b4d56712529b08d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  accelerationTimeInAir: 0.3
+  accelerationTimeWalking: 0.1
+  accelerationTimeRunning: 0.25
+  jumpBufferTime: 0.2
+  coyoteTime: 0.1
+  stopJumpRate: 0.6
 --- !u!114 &4442789945374831988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +298,21 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: dc5ec850-0ebf-425a-afd6-7b6190041a26
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4442789945374831985}
+        m_MethodName: OnHoldShiftMoveSpeed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e7f8984f-b51d-4099-a830-8dea2717c15d
+    m_ActionName: Player/Walk[/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
