@@ -8,7 +8,7 @@ namespace FridgeLogic.ScriptableObjects.Groups
     {
         private List<GameObject> gameObjects = new List<GameObject>();
 
-        public IEnumerable<GameObject> Group => gameObjects;
+        public IReadOnlyList<GameObject> Group => gameObjects;
         public int Count => gameObjects.Count;
 
         public void Add(GameObject gameObject)

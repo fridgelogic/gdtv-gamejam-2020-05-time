@@ -1,4 +1,7 @@
+using System.Linq;
+using System.Collections;
 using FridgeLogic.ScriptableObjects.GameEvents;
+using FridgeLogic.ScriptableObjects.Groups;
 using UnityEngine;
 
 namespace FridgeLogic.GameStateManagement
@@ -20,11 +23,18 @@ namespace FridgeLogic.GameStateManagement
         [SerializeField]
         private GameEvent gameUnpaused = null;
 
+        [SerializeField]
+        private GameEvent restartGame = null;
+
+        [SerializeField]
+        private GameObjectGroup players = null;
+
         private bool isGamePaused;
         private float originalTimeScale;
 
         public void StartGame()
         {
+            Time.timeScale = 1f;
             gameStarted.Raise();
         }
 
@@ -58,6 +68,22 @@ namespace FridgeLogic.GameStateManagement
                 Time.timeScale = originalTimeScale;
                 gameUnpaused.Raise();
             }
+        }
+
+        public void RestartLevel()
+        {
+            StartCoroutine(ProcessLevelRestart());
+        }
+
+        private IEnumerator ProcessLevelRestart()
+        {
+            for (int i = players.Count - 1; i >= 0; i--)
+            {
+                players.Group[i].SetActive(false);
+            }
+
+            yield return new WaitForEndOfFrame();
+            restartGame.Raise();
         }
 
         private void Awake()

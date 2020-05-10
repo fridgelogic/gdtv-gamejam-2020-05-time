@@ -6,21 +6,50 @@ namespace FridgeLogic.GameStateManagement
 {
     public class GameSceneLoader : MonoBehaviour
     {
-        public void RestartScene()
+        [SerializeField]
+        private SceneReference mainMenu = null;
+
+        [SerializeField]
+        private SceneReference firstLevel = null;
+
+        public void GoToMainMenu()
         {
-            // StartCoroutine(ReloadCurrentScene());
-            var scene = SceneManager.GetActiveScene();
-            SceneManager.LoadSceneAsync(scene.name);
+            StartCoroutine(LoadLevel(mainMenu));
         }
 
-        private IEnumerator ReloadCurrentScene()
+        public void StartGame()
         {
-            gameObject.transform.parent = null;
-            DontDestroyOnLoad(gameObject);
-            var scene = SceneManager.GetActiveScene();
-            yield return SceneManager.UnloadSceneAsync(scene);
-            yield return SceneManager.LoadSceneAsync(scene.name, LoadSceneMode.Single);
-            Destroy(gameObject);
+            StartCoroutine(LoadLevel(firstLevel));
+        }
+
+        public void RestartLevel()
+        {
+            StartCoroutine(LoadLevel(firstLevel));
+        }
+
+        private IEnumerator LoadLevel(SceneReference scene, bool unloadActiveScene = true)
+        {
+            if (unloadActiveScene)
+            {
+                yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            }
+            yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByPath(scene.ScenePath));
+        }
+
+        private IEnumerator LoadLeve(Scene scene, bool unloadActiveScene = true)
+        {
+            if (unloadActiveScene)
+            {
+                yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            }
+            yield return SceneManager.LoadSceneAsync(scene.buildIndex, LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(scene);
+        }
+
+        private void Start()
+        {
+            StartCoroutine(LoadLevel(mainMenu, false));
         }
     }
 }
