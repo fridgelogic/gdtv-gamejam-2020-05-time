@@ -9,6 +9,9 @@ namespace FridgeLogic.Damage
         private float maxHealth = 1f;
 
         [SerializeField]
+        private GameObjectGameEvent entityHit = null;
+
+        [SerializeField]
         private GameObjectGameEvent entityDied = null;
 
         private float currentHealth;
@@ -16,9 +19,13 @@ namespace FridgeLogic.Damage
         public void TakeDamage(float damage)
         {
             currentHealth = Mathf.Clamp(currentHealth - damage, 0f, maxHealth);
-            if (currentHealth <= 0f)
+            if (currentHealth > 0f)
             {
-                entityDied.Raise(this.gameObject);
+                entityHit?.Raise(gameObject);
+            }
+            else
+            {
+                entityDied?.Raise(gameObject);
                 Destroy(gameObject, 0.5f);
                 gameObject.SetActive(false);
             }
@@ -27,7 +34,6 @@ namespace FridgeLogic.Damage
         private void Awake()
         {
             currentHealth = maxHealth;
-            Debug.Assert(entityDied);
         }
     }
 

@@ -7,26 +7,24 @@ namespace FridgeLogic.Damage
     public class DeathSystem : MonoBehaviour
     {
         [SerializeField]
-        private GameObjectGroup players = null;
+        private GameObjectGroup entities = null;
 
         [SerializeField]
-        private GameEvent allPlayersDead = null;
+        private GameEvent allEntitiesDead = null;
 
         public void EntityDied(GameObject entity)
         {
-            Debug.Log($"Entity {entity.name} died");
-            for (int i = players.Count - 1; i >= 0; i--)
+            for (int i = entities.Count - 1; i >= 0; i--)
             {
-                if (players.Group[i] == entity)
+                if (entities.Group[i] == entity)
                 {
-                    players.Group[i].SetActive(false);
+                    entities.Group[i].SetActive(false);
                 }
             }
 
-            Debug.Log($"{players.Count} players remaining");
-            if (players.Count == 0)
+            if (entities.Count == 0)
             {
-                allPlayersDead.Raise();
+                allEntitiesDead?.Raise();
             }
         }
     }

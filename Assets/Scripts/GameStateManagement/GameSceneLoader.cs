@@ -7,49 +7,34 @@ namespace FridgeLogic.GameStateManagement
     public class GameSceneLoader : MonoBehaviour
     {
         [SerializeField]
-        private SceneReference mainMenu = null;
+        private SceneReference scene = null;
 
-        [SerializeField]
-        private SceneReference firstLevel = null;
-
-        public void GoToMainMenu()
+        public void LoadScene(float timeToWait)
         {
-            StartCoroutine(LoadLevel(mainMenu));
+            StartCoroutine(HandleSceneLoad(timeToWait));
         }
 
-        public void StartGame()
+        private IEnumerator HandleSceneLoad(float timeToWait)
         {
-            StartCoroutine(LoadLevel(firstLevel));
-        }
-
-        public void RestartLevel()
-        {
-            StartCoroutine(LoadLevel(firstLevel));
-        }
-
-        private IEnumerator LoadLevel(SceneReference scene, bool unloadActiveScene = true)
-        {
-            if (unloadActiveScene)
+            if (timeToWait > 0)
             {
-                yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+                Time.timeScale = 1f;
+                yield return new WaitForSeconds(timeToWait);
             }
-            yield return SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(SceneManager.GetSceneByPath(scene.ScenePath));
-        }
-
-        private IEnumerator LoadLeve(Scene scene, bool unloadActiveScene = true)
-        {
-            if (unloadActiveScene)
+            else
             {
-                yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+                yield return null;
             }
-            yield return SceneManager.LoadSceneAsync(scene.buildIndex, LoadSceneMode.Additive);
-            SceneManager.SetActiveScene(scene);
-        }
 
-        private void Start()
-        {
-            StartCoroutine(LoadLevel(mainMenu, false));
+            if (!string.IsNullOrWhiteSpace(scene.ScenePath))
+            {
+                yield return SceneManager.LoadSceneAsync(scene);
+            }
+            else
+            {
+                // Reload the current scene
+                yield return SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 }

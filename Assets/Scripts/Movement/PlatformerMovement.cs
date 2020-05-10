@@ -1,3 +1,4 @@
+using FridgeLogic.ScriptableObjects.GameEvents;
 using UnityEngine;
 
 namespace FridgeLogic.Movement
@@ -41,6 +42,9 @@ namespace FridgeLogic.Movement
         [SerializeField]
         [Range(0, 0.8f)]
         private float stopJumpRate = 0.5f;
+
+        [SerializeField]
+        private GameEvent jumped = null;
         #endregion
 
         public Vector2 CurrentMovement { get; private set; }
@@ -118,6 +122,7 @@ namespace FridgeLogic.Movement
                 jumpSentAt = float.MinValue;
                 velocity.y += jumpVelocity;
                 isJumping = true;
+                jumped?.Raise();
             }
             else if (stopJump)
             {
@@ -191,14 +196,10 @@ namespace FridgeLogic.Movement
         #endregion
 
         #region Unity Lifecycle
-            private void Awake()
-            {
-                CalculateJumpParameters();
-            }
-
             private void Start()
             {
                 platformerCollider = GetComponent<PlatformerCollider2d>();
+                CalculateJumpParameters();
             }
 
             private void Update()

@@ -35,6 +35,19 @@ namespace FridgeLogic.Movement
         // Component References
         private BoxCollider2D boxCollider = null;
 
+        private BoxCollider2D BoxCollider
+        {
+            get
+            {
+                if (!boxCollider)
+                {
+                    boxCollider = GetComponent<BoxCollider2D>();
+                }
+
+                return boxCollider;
+            }
+        }
+
         // Calculated Values
         private RaycastOriginCollection raycastOrigins;
         private float colliderInset;
@@ -43,7 +56,7 @@ namespace FridgeLogic.Movement
 
         protected void UpdateRaycastOrigins()
         {
-            var bounds = boxCollider.bounds;
+            var bounds = BoxCollider.bounds;
             // Apply the collider inset
             bounds.Expand(colliderInset * -2);
             raycastOrigins = new RaycastOriginCollection(bounds);
@@ -57,7 +70,7 @@ namespace FridgeLogic.Movement
 
         private void CalculateRaySpacing()
         {
-            var bounds = boxCollider.bounds;
+            var bounds = BoxCollider.bounds;
             // Apply the collider inset
             bounds.Expand(colliderInset * -2);
             horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
@@ -125,7 +138,6 @@ namespace FridgeLogic.Movement
         #region Unity Lifecycle
         protected virtual void Start()
         {
-            boxCollider = GetComponent<BoxCollider2D>();
             CalculateColliderInset();
             CalculateRaySpacing();
         }
@@ -136,7 +148,6 @@ namespace FridgeLogic.Movement
         {
             if (!Application.isPlaying)
             {
-                boxCollider = GetComponent<BoxCollider2D>();
                 CalculateColliderInset();
                 UpdateRaycastOrigins();
                 CalculateRaySpacing();

@@ -74,5 +74,11 @@ namespace FridgeLogic.TimeLimit
             yield return new WaitForSeconds(1);
             timeLimitExpired.Raise();
         }
+
+        private void Start()
+        {
+            timerProgress = 0f;
+            timeLimit.Value = timeLimit.OriginalValue;
+        }
     }
 }

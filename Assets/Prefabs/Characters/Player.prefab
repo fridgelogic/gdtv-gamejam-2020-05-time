@@ -192,6 +192,7 @@ MonoBehaviour:
   jumpBufferTime: 0.2
   coyoteTime: 0.1
   stopJumpRate: 0.6
+  jumped: {fileID: 11400000, guid: 0deb3f79d9d53454099408a96b71f095, type: 2}
 --- !u!114 &735130805998854533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
+  entityHit: {fileID: 0}
   entityDied: {fileID: 11400000, guid: 7e572506cdef20548a413e6b083870cd, type: 2}
 --- !u!114 &4442789945374831988
 MonoBehaviour:
@@ -411,8 +413,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6838578222333583921}
   - component: {fileID: 6819611871408407217}
+  - component: {fileID: 4914342752598138713}
   m_Layer: 8
-  m_Name: Point Light 2D
+  m_Name: PlayerGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,3 +476,22 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!95 &4914342752598138713
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5905407994179232643}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
