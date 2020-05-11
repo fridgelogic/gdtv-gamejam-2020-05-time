@@ -8,30 +8,41 @@ namespace FridgeLogic.Control
     public class PlatformerInputAgent : MonoBehaviour
     {
         private IMovement2D movement = null;
+        private IMovement2D Movement
+        {
+            get
+            {
+                if (movement == null)
+                {
+                    movement = GetComponent<IMovement2D>();
+                }
+                return movement;
+            }
+        }
 
         private void ProcessMovement(Vector2 inputVector)
         {
-            movement.Move(inputVector);
+            Movement.Move(inputVector);
         }
 
         private void ProcessJump()
         {
-            movement.StartJump();
+            Movement.StartJump();
         }
 
         private void CancelJump()
         {
-            movement.StopJump();
+            Movement.StopJump();
         }
 
         private void StartRun()
         {
-            movement.StartRunning();
+            Movement.StartRunning();
         }
 
         private void StopRun()
         {
-            movement.StopRunning();
+            Movement.StopRunning();
         }
 
         #region Input Events
@@ -62,13 +73,6 @@ namespace FridgeLogic.Control
             {
                 StopRun();
             }
-        }
-        #endregion
-
-        #region Unity Lifecycle
-        private void Start()
-        {
-            movement = GetComponent<IMovement2D>();
         }
         #endregion
     }
