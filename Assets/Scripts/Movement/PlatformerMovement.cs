@@ -1,4 +1,3 @@
-using FridgeLogic.ScriptableObjects.GameEvents;
 using UnityEngine;
 
 namespace FridgeLogic.Movement
@@ -7,44 +6,31 @@ namespace FridgeLogic.Movement
     public class PlatformerMovement : MonoBehaviour, IMovement2D
     {
         #region Inspector Fields
-        [SerializeField]
-        private float groundSpeed = 12f;
+        [SerializeField] private float groundSpeed = 12f;
 
-        [SerializeField]
-        private float runSpeedModifier = 1.75f;
+        [SerializeField] private float runSpeedModifier = 1.75f;
 
-        [SerializeField]
         [Min(0)]
-        private float jumpHeight = 4f;
+        [SerializeField] private float jumpHeight = 4f;
 
-        [SerializeField]
         [Min(0)]
-        private float timeToJumpApex = 0.4f;
+        [SerializeField] private float timeToJumpApex = 0.4f;
 
-        [SerializeField]
         [Min(0)]
-        private float accelerationTimeInAir = 0.25f;
+        [SerializeField] private float accelerationTimeInAir = 0.25f;
         
-        [SerializeField]
         [Min(0)]
-        private float accelerationTimeWalking = 0.1f;
+        [SerializeField] private float accelerationTimeWalking = 0.1f;
 
-        [SerializeField]
         [Min(0)]
-        private float accelerationTimeRunning = 0.2f;
+        [SerializeField] private float accelerationTimeRunning = 0.2f;
 
-        [SerializeField]
-        private float jumpBufferTime = 0.1f;
+        [SerializeField] private float jumpBufferTime = 0.1f;
 
-        [SerializeField]
-        private float coyoteTime = 0.1f;
+        [SerializeField] private float coyoteTime = 0.1f;
 
-        [SerializeField]
         [Range(0, 0.8f)]
-        private float stopJumpRate = 0.5f;
-
-        [SerializeField]
-        private GameEvent jumped = null;
+        [SerializeField] private float stopJumpRate = 0.5f;
         #endregion
 
         public Vector2 CurrentMovement { get; private set; }
@@ -122,7 +108,6 @@ namespace FridgeLogic.Movement
                 jumpSentAt = float.MinValue;
                 velocity.y += jumpVelocity;
                 isJumping = true;
-                jumped?.Raise();
             }
             else if (stopJump)
             {

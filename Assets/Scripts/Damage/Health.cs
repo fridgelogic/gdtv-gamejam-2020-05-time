@@ -1,44 +1,31 @@
-using FridgeLogic.ScriptableObjects.GameEvents;
+using System;
 using UnityEngine;
 
 namespace FridgeLogic.Damage
 {
-    public class Health : MonoBehaviour, IHealth
+    public class Health : MonoBehaviour
     {
-        [SerializeField]
-        private float maxHealth = 1f;
+        public static event Action<GameObject> EntityDied;
 
-        [SerializeField]
-        private GameObjectGameEvent entityHit = null;
+        [SerializeField] private float maxHealth = 1f;
 
-        [SerializeField]
-        private GameObjectGameEvent entityDied = null;
-
-        private float currentHealth;
+        public float MaxHealth => maxHealth;
+        public float CurrentHealth { get; private set; }
+        public bool IsDead { get; private set; }
 
         public void TakeDamage(float damage)
         {
-            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, maxHealth);
-            if (currentHealth > 0f)
+            CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0f, maxHealth);
+            if (CurrentHealth <= 0f)
             {
-                entityHit?.Raise(gameObject);
-            }
-            else
-            {
-                entityDied?.Raise(gameObject);
-                Destroy(gameObject, 0.5f);
-                gameObject.SetActive(false);
+                IsDead = true;
+                EntityDied?.Invoke(gameObject);
             }
         }
 
         private void Awake()
         {
-            currentHealth = maxHealth;
+            CurrentHealth = maxHealth;
         }
-    }
-
-    public interface IHealth
-    {
-        void TakeDamage(float damage);
     }
 }

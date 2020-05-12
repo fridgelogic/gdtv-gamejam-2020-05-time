@@ -2,17 +2,18 @@
 
 namespace FridgeLogic.Damage
 {
+    [RequireComponent(typeof(Attacker))]
     public class Hazard : MonoBehaviour
     {
-        [SerializeField]
-        private float damage = 1f;
+        private Attacker attacker = null;
+        private Attacker Attacker => attacker ?? (attacker = GetComponent<Attacker>());
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             var health = other.GetComponent<Health>();
             if (health)
             {
-                health.TakeDamage(damage);
+                Attacker.Attack(health);
             }
         }
     }

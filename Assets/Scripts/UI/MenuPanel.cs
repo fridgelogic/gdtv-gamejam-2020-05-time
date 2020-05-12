@@ -5,13 +5,9 @@ using UnityEngine.UI;
 namespace FridgeLogic.UI
 {
     public class MenuPanel : MonoBehaviour
-    
     {
-        [SerializeField]
-        private EventSystem eventSystem = null;
-
-        [SerializeField]
-        private Button selectedControl = null;
+        [SerializeField] private EventSystem eventSystem = null;
+        [SerializeField] private Button selectedControl = null;
 
         private void Awake()
         {

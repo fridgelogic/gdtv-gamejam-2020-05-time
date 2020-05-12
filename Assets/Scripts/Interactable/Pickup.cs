@@ -1,18 +1,15 @@
-﻿using FridgeLogic.ScriptableObjects.GameEvents;
+﻿using System;
 using UnityEngine;
 
 namespace FridgeLogic.Interactable
 {
     public class Pickup : MonoBehaviour
     {
-        [SerializeField]
-        private GameEvent onPickup = null;
+        public static event Action<GameObject> PickedUp;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            gameObject.SetActive(false);
-            Destroy(this.gameObject, 1f);
-            onPickup.Raise();
+            PickedUp?.Invoke(gameObject);
         }
     }
 }

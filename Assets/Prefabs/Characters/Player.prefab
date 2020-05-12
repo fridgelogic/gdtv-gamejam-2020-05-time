@@ -17,9 +17,7 @@ GameObject:
   - component: {fileID: 4442789945374831987}
   - component: {fileID: 735130805998854533}
   - component: {fileID: 4442789945374831988}
-  - component: {fileID: 6468638067844752735}
-  - component: {fileID: 6992768083906968847}
-  - component: {fileID: 8661727246183877688}
+  - component: {fileID: 7027546543314273169}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -192,7 +190,6 @@ MonoBehaviour:
   jumpBufferTime: 0.2
   coyoteTime: 0.1
   stopJumpRate: 0.6
-  jumped: {fileID: 11400000, guid: 0deb3f79d9d53454099408a96b71f095, type: 2}
 --- !u!114 &735130805998854533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,8 +203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1
-  entityHit: {fileID: 0}
-  entityDied: {fileID: 11400000, guid: 7e572506cdef20548a413e6b083870cd, type: 2}
 --- !u!114 &4442789945374831988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +331,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &6468638067844752735
+--- !u!114 &7027546543314273169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -345,64 +340,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4442789945374831980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2be7451792131404bb68b575a2d61723, type: 3}
+  m_Script: {fileID: 11500000, guid: c4bc83e1592159a4ebcb9b83498f0462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: bfd0652424cd91a45bc21766c30449f1, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4442789945374831988}
-        m_MethodName: DeactivateInput
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6992768083906968847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442789945374831980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2be7451792131404bb68b575a2d61723, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: bf541a57f06f3fb498484e35c2a951a1, type: 2}
-  response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4442789945374831988}
-        m_MethodName: ActivateInput
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
---- !u!114 &8661727246183877688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442789945374831980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c00ce49cbdc4e6f48a1dd949d69e5598, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectGroup: {fileID: 11400000, guid: 8c3dba124aff20b4ca64d7d412705af6, type: 2}
 --- !u!1 &5905407994179232643
 GameObject:
   m_ObjectHideFlags: 0
