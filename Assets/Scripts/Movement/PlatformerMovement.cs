@@ -181,7 +181,7 @@ namespace FridgeLogic.Movement
                     var moveRate = Mathf.Abs(velocity.x) / (runSpeedModifier * groundSpeed);
                     animator.SetFloat("FacingX", Mathf.Sign(CurrentMovement.x));
                     animator.SetFloat("HorizontalSpeed", moveRate * 2);
-                    animator.SetBool("IsRunning", isRunning);
+                    animator.SetBool("IsRunning", Mathf.Abs(velocity.x) > groundSpeed);
                 }
                 else
                 {
