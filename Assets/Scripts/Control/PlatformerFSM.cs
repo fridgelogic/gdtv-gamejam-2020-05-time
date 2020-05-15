@@ -1,15 +1,16 @@
+// using FridgeLogic.Movement;
 // using FridgeLogic.Patterns.FSM;
 // using UnityEngine;
 
 // namespace FridgeLogic.Control
 // {
-//     public class PlatformerCharacterController
+//     public class PlatformerFSM
 //     {
 //         private readonly IPlatformerInput _input;
 //         private readonly IPlatformerCharacter _character;
 //         private readonly StateMachine _stateMachine;
 
-//         public PlatformerCharacterController(IPlatformerInput input, IPlatformerCharacter character)
+//         public PlatformerFSM(IPlatformerInput input, IPlatformerCharacter character)
 //         {
 //             _input = input;
 //             _character = character;
@@ -20,12 +21,12 @@
 
 //         private void InitializeStateMachine()
 //         {
-//             var idle = new PlatformerCharacterIdle();
-//             var walk = new PlatformerCharacterWalk();
-//             var run = new PlatformerCharacterRun();
-//             var jump = new PlatformerCharacterJump();
-//             var fall = new PlatformerCharacterFall();
-//             var dead = new PlatformerCharacterDead();
+//             var idle = new PlatformerIdle();
+//             var walk = new PlatformerWalk();
+//             var run = new PlatformerRun();
+//             var jump = new PlatformerJump();
+//             var fall = new PlatformerFall();
+//             var dead = new PlatformerDead();
 
 //             // To Idle
 //             _stateMachine.AddTransition(
@@ -96,7 +97,7 @@
 //             _stateMachine.AddTransition(
 //                 to: dead,
 //                 when: IsDead
-//             )
+//             );
 //         }
 
 //         private bool IsStill() => _character.IsGrounded && _character.Velocity.magnitude == 0f;
@@ -118,13 +119,35 @@
 
 //     public interface IPlatformerCharacter
 //     {
-//         Vector2 Velocity { get; }
-//         float RunThreshold { get; }
-//         bool IsGrounded { get; }
-//         bool IsDead { get; }
+//         Vector2 Velocity { get; set; }
+//         float RunThreshold { get; set; }
+//         bool IsGrounded { get; set; }
+//         bool IsDead { get; set; }
 //     }
 
-//     public class PlatformerCharacterIdle : IState
+//     public class PlatformerIdle : IState
+//     {
+//         public PlatformerIdle(MovementController movementController, JumpController jumpController) : base(movementController, jumpController)
+//         {
+//         }
+
+//         public void OnEnter()
+//         {
+//             throw new System.NotImplementedException();
+//         }
+
+//         public void OnExit()
+//         {
+//             throw new System.NotImplementedException();
+//         }
+
+//         public void OnUpdate(float dt)
+//         {
+//             throw new System.NotImplementedException();
+//         }
+//     }
+
+//     public class PlatformerWalk : IState
 //     {
 //         public void OnEnter()
 //         {
@@ -142,7 +165,7 @@
 //         }
 //     }
 
-//     public class PlatformerCharacterWalk : IState
+//     public class PlatformerRun : IState
 //     {
 //         public void OnEnter()
 //         {
@@ -160,7 +183,7 @@
 //         }
 //     }
 
-//     public class PlatformerCharacterRun : IState
+//     public class PlatformerJump : IState
 //     {
 //         public void OnEnter()
 //         {
@@ -178,7 +201,7 @@
 //         }
 //     }
 
-//     public class PlatformerCharacterJump : IState
+//     public class PlatformerFall : IState
 //     {
 //         public void OnEnter()
 //         {
@@ -196,25 +219,7 @@
 //         }
 //     }
 
-//     public class PlatformerCharacterFall : IState
-//     {
-//         public void OnEnter()
-//         {
-//             throw new System.NotImplementedException();
-//         }
-
-//         public void OnExit()
-//         {
-//             throw new System.NotImplementedException();
-//         }
-
-//         public void OnUpdate(float dt)
-//         {
-//             throw new System.NotImplementedException();
-//         }
-//     }
-
-//     public class PlatformerCharacterDead : IState
+//     public class PlatformerDead : IState
 //     {
 //         public void OnEnter()
 //         {

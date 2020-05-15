@@ -26,7 +26,7 @@ namespace FridgeLogic.Movement
         private CollisionInfo collisionInfo;
         private Vector2 unmodifiedVelocity;
 
-        public Vector2 UpdateCollisions(Vector2 velocity)
+        public void ApplyCollisions(ref Vector2 velocity)
         {
             UpdateRaycastOrigins();
             collisionInfo.Reset();
@@ -44,7 +44,6 @@ namespace FridgeLogic.Movement
             {
                 velocity = CalculateVerticalCollisions(velocity);
             }
-            return velocity;
         }
 
         private Vector2 CalculateHorizontalCollisions(Vector2 velocity)

@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 4442789945374831984}
   - component: {fileID: 4442789945374831985}
   - component: {fileID: 4442789945374831986}
-  - component: {fileID: 4442789945374831987}
   - component: {fileID: 735130805998854533}
   - component: {fileID: 4442789945374831988}
   - component: {fileID: 7027546543314273169}
+  - component: {fileID: 4143044817529423740}
+  - component: {fileID: 7760724270176023276}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -168,28 +169,6 @@ MonoBehaviour:
     m_Bits: 513
   maxClimbingAngle: 60
   maxDescendingAngle: 60
---- !u!114 &4442789945374831987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4442789945374831980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d9c99be4a3be454e8387b4d3658b8ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundSpeed: 18
-  runSpeedModifier: 1.5
-  jumpHeight: 8
-  timeToJumpApex: 0.4
-  accelerationTimeInAir: 0.3
-  accelerationTimeWalking: 0.1
-  accelerationTimeRunning: 0.25
-  jumpBufferTime: 0.2
-  coyoteTime: 0.1
-  stopJumpRate: 0.6
 --- !u!114 &735130805998854533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,6 +320,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4bc83e1592159a4ebcb9b83498f0462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tagCollection: {fileID: 0}
+--- !u!114 &4143044817529423740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442789945374831980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f1e1d5b0931ab499d5497230fa2f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _options: {fileID: 11400000, guid: 30af261fc3fb2bc47824dd1ae32a99db, type: 2}
+--- !u!114 &7760724270176023276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442789945374831980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c875ce635dd022d42bf93b898ffeae20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5905407994179232643

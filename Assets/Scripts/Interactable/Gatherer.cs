@@ -1,17 +1,15 @@
-using System;
 using UnityEngine;
 
 namespace FridgeLogic.Interactable
 {
     public class Gatherer : MonoBehaviour
     {
-        public event Action<Pickup> Gathered;
-
-        public void Gather(Pickup pickup)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            Gathered?.Invoke(pickup);
-            pickup.gameObject.SetActive(false);
-            Destroy(pickup.gameObject, 0.5f);
+            if (other.TryGetComponent<Pickup>(out var pickup))
+            {
+                pickup.OnPickUp(gameObject);
+            }
         }
     }
 }

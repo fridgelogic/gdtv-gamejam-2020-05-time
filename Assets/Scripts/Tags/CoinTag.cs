@@ -1,8 +1,6 @@
-using UnityEngine;
-
 namespace FridgeLogic.Tags
 {
-    public class CoinTag : MonoBehaviour
+    public class CoinTag : ComponentTag
     {
         
     }

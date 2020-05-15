@@ -4,39 +4,32 @@ using UnityEngine.InputSystem;
 
 namespace FridgeLogic.Control
 {
-    [RequireComponent(typeof(IMovement2D))]
+    [RequireComponent(typeof(PlatformerController))]
     public class PlatformerInputAgent : MonoBehaviour
     {
-        
-
-        public IMovement2D _movement = null;
-        private IMovement2D Movement => _movement ?? (_movement = GetComponent<IMovement2D>());
-
-        private void ProcessMovement(Vector2 inputVector)
-        {
-            Movement.Move(inputVector);
-        }
-
-        private void ProcessJump() => Movement.StartJump();
-
-        private void CancelJump() => Movement.StopJump();
-
-        private void StartRun() => Movement.StartRunning();
-
-        private void StopRun() => Movement.StopRunning();
+        private PlatformerController _platformerController = null;
+        private PlatformerController PlatformerController => _platformerController ?? (_platformerController = GetComponent<PlatformerController>());
 
         #region Input Events
-        public void OnMove(InputAction.CallbackContext context) => ProcessMovement(context.ReadValue<Vector2>());
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            var movement = context.ReadValue<Vector2>();
+            if (Mathf.Abs(movement.x) < 0.1f)
+            {
+                movement.x = 0f;
+            }
+            PlatformerController.Move(movement);
+        }
 
         public void OnJump(InputAction.CallbackContext context)
         {
             switch (context.phase)
             {
                 case InputActionPhase.Performed:
-                    ProcessJump();
+                    PlatformerController.StartJumping();
                     break;
                 case InputActionPhase.Canceled:
-                    CancelJump();
+                    PlatformerController.StopJumping();
                     break;
                 default: break;
             }
@@ -47,10 +40,10 @@ namespace FridgeLogic.Control
             switch (context.phase)
             {
                 case InputActionPhase.Performed:
-                    StartRun();
+                    PlatformerController.StartRunning();
                     break;
                 case InputActionPhase.Canceled:
-                    StopRun();
+                    PlatformerController.StopRunning();
                     break;
                 default: break;
             }

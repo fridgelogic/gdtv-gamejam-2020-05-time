@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5e300bde19e034baf88177538d179b, type: 3}
+  m_Name: GhostMovementOptions
+  m_EditorClassIdentifier: 
+  groundSpeed: 16
+  runSpeedModifier: 1.75
+  jumpHeight: 8
+  timeToJumpApex: 0.4
+  accelerationTimeInAir: 0.25
+  accelerationTimeWalking: 0.1
+  accelerationTimeRunning: 0.2
+  jumpBufferTime: 0.1
+  coyoteTime: 0.1
+  stopJumpRate: 0.5

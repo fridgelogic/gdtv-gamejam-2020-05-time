@@ -1,15 +1,24 @@
-﻿using System;
+﻿using FridgeLogic.Audio;
 using UnityEngine;
 
 namespace FridgeLogic.Interactable
 {
     public class Pickup : MonoBehaviour
     {
-        public static event Action<GameObject> PickedUp;
+        [SerializeField] private AudioClip _pickupSound = null;
+        [SerializeField] private SoundPlayerProvider _soundPlayer = null;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void OnPickUp(GameObject go)
         {
-            PickedUp?.Invoke(gameObject);
+            Debug.Log($"{name} picked up by {go}");
+            
+            if (_pickupSound && _soundPlayer)
+            {
+                _soundPlayer.SoundPlayer.PlaySound(_pickupSound);
+            }
+
+            Destroy(gameObject, 0.5f);
+            gameObject.SetActive(false);
         }
     }
 }
