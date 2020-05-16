@@ -35,7 +35,7 @@ namespace FridgeLogic.Control
         {
             if (_platformerCollider.CollisionInfo.below)
             {
-                if (Mathf.Abs(translation.x) >= 0.001)
+                if (Mathf.Abs(translation.x) >= 0.125)
                 {
                     Animator.SetFloat("FacingX", Mathf.Sign(translation.x));
                     Animator.SetFloat("HorizontalSpeed", 1f);
@@ -69,6 +69,5 @@ namespace FridgeLogic.Control
             UpdateAnimator(translation);
         }
         #endregion
-
     }
 }
