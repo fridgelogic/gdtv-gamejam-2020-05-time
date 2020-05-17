@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea04635d9b83ab243a5dc55a536846a5, type: 3}
-  m_Name: Low Time Limit
+  m_Script: {fileID: 11500000, guid: b1ed9fa7832478e418a2cd314d80c7b2, type: 3}
+  m_Name: BGM Player
   m_EditorClassIdentifier: 
-  defaultValue: 15

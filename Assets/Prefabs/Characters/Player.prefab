@@ -193,6 +193,9 @@ MonoBehaviour:
   coyoteTime: 0.1
   stopJumpRate: 0.6
   jumped: {fileID: 11400000, guid: 0deb3f79d9d53454099408a96b71f095, type: 2}
+  _playerJump: {fileID: 8300000, guid: 7984e76a99b96b04fa756d947fce5bd7, type: 3}
+  _soundPlayerProvider: {fileID: 11400000, guid: f188abe001c545c45b3853f0be3a2a66,
+    type: 2}
 --- !u!114 &735130805998854533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,9 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f507823f69ff68d41830f098674906bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  entityHit: {fileID: 0}
-  entityDied: {fileID: 11400000, guid: 7e572506cdef20548a413e6b083870cd, type: 2}
+  _maxHealth: 1
+  _entityHit: {fileID: 0}
+  _entityDied: {fileID: 11400000, guid: 7e572506cdef20548a413e6b083870cd, type: 2}
+  _soundPlayerProvider: {fileID: 11400000, guid: f188abe001c545c45b3853f0be3a2a66,
+    type: 2}
+  _playOnDeath: {fileID: 8300000, guid: f9fdc462d1f7b72428bc1a13129cb8d2, type: 3}
 --- !u!114 &4442789945374831988
 MonoBehaviour:
   m_ObjectHideFlags: 0

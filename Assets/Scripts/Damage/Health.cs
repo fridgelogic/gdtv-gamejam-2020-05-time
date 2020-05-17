@@ -1,4 +1,5 @@
 using FridgeLogic.ScriptableObjects.GameEvents;
+using FridgeLogic.ScriptableObjects.Providers;
 using UnityEngine;
 
 namespace FridgeLogic.Damage
@@ -6,26 +7,37 @@ namespace FridgeLogic.Damage
     public class Health : MonoBehaviour, IHealth
     {
         [SerializeField]
-        private float maxHealth = 1f;
+        private float _maxHealth = 1f;
 
         [SerializeField]
-        private GameObjectGameEvent entityHit = null;
+        private GameObjectGameEvent _entityHit = null;
 
         [SerializeField]
-        private GameObjectGameEvent entityDied = null;
+        private GameObjectGameEvent _entityDied = null;
 
-        private float currentHealth;
+        [SerializeField]
+        private SoundPlayerProvider _soundPlayerProvider = null;
+
+        [SerializeField]
+        private AudioClip _playOnDeath = null;
+
+        private float _currentHealth;
 
         public void TakeDamage(float damage)
         {
-            currentHealth = Mathf.Clamp(currentHealth - damage, 0f, maxHealth);
-            if (currentHealth > 0f)
+            _currentHealth = Mathf.Clamp(_currentHealth - damage, 0f, _maxHealth);
+            if (_currentHealth > 0f)
             {
-                entityHit?.Raise(gameObject);
+                _entityHit?.Raise(gameObject);
             }
             else
             {
-                entityDied?.Raise(gameObject);
+                if (_soundPlayerProvider && _playOnDeath)
+                {
+                    _soundPlayerProvider.SoundPlayer.PlaySound(_playOnDeath);
+                }
+
+                _entityDied?.Raise(gameObject);
                 Destroy(gameObject, 0.5f);
                 gameObject.SetActive(false);
             }
@@ -33,7 +45,7 @@ namespace FridgeLogic.Damage
 
         private void Awake()
         {
-            currentHealth = maxHealth;
+            _currentHealth = _maxHealth;
         }
     }
 

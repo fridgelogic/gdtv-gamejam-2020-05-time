@@ -17,7 +17,7 @@ namespace FridgeLogic.UI
 
         public void OnUpdateTimeLimit()
         {
-            timeLimit.text = currentTimeLimit.Value.ToString();
+            timeLimit.text = Mathf.Max(0, currentTimeLimit.Value).ToString();
         }
 
         public void OnLowTimeRemaining()

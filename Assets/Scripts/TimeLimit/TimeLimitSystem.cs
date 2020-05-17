@@ -14,61 +14,54 @@ namespace FridgeLogic.TimeLimit
         private IntValue timeLimit = null;
 
         [SerializeField]
-        private IntValue lowTimeLimit = null;
-
-        [SerializeField]
         private GameEvent timeLimitUpdated = null;
-
-        [SerializeField]
-        private GameEvent lowTimeRemaining = null;
 
         [SerializeField]
         private GameEvent timeLimitExpired = null;
 
-        private Coroutine runTimer;
-        private bool firedTimeLimitLow;
-        private float nextTimerTick;
-        private float timerProgress;
+        private Coroutine _runTimer;
+        private bool _firedTimeLimitLow;
+        private float _nextTimerTick;
+        private float _timerProgress;
 
         public void StartTimer()
         {
-            nextTimerTick = Time.time + timeFactor - timerProgress;
-            runTimer = StartCoroutine(RunTimer());
+            _nextTimerTick = Time.time + timeFactor - _timerProgress;
+            _runTimer = StartCoroutine(RunTimer());
         }
 
         public void PauseTimer()
         {
-            if (runTimer != null)
+            if (_runTimer != null)
             {
-                StopCoroutine(runTimer);
-                runTimer = null;
+                StopCoroutine(_runTimer);
+                _runTimer = null;
             }
-            timerProgress = timeFactor - (nextTimerTick - Time.time);
+            _timerProgress = timeFactor - (_nextTimerTick - Time.time);
         }
 
         public void ResetTimer()
         {
             PauseTimer();
-            timerProgress = 0f;
+            _timerProgress = 0f;
             timeLimit.Value = timeLimit.OriginalValue;
             StartTimer();
+        }
+
+        public void AddTime(IntValue value)
+        {
+            timeLimit.Value += value.Value;
+            timeLimitUpdated.Raise();
         }
 
         private IEnumerator RunTimer()
         {
             while (timeLimit.Value > 0)
             {
-                yield return new WaitForSeconds(nextTimerTick - Time.time);
+                yield return new WaitForSeconds(_nextTimerTick - Time.time);
                 timeLimit.Value--;
                 timeLimitUpdated.Raise();
-
-                if (!firedTimeLimitLow && timeLimit.Value <= lowTimeLimit.Value)
-                {
-                    firedTimeLimitLow = true;
-                    lowTimeRemaining.Raise();
-                }
-                
-                nextTimerTick = Time.time + timeFactor;
+                _nextTimerTick = Time.time + timeFactor;
             }
 
             yield return new WaitForSeconds(1);
@@ -77,7 +70,7 @@ namespace FridgeLogic.TimeLimit
 
         private void Start()
         {
-            timerProgress = 0f;
+            _timerProgress = 0f;
             timeLimit.Value = timeLimit.OriginalValue;
         }
     }

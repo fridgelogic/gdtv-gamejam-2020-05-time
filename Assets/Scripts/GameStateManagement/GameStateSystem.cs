@@ -1,9 +1,6 @@
-using System.Linq;
-using System.Collections;
 using FridgeLogic.ScriptableObjects.GameEvents;
-using FridgeLogic.ScriptableObjects.Groups;
+using FridgeLogic.ScriptableObjects.Providers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace FridgeLogic.GameStateManagement
 {
@@ -27,11 +24,28 @@ namespace FridgeLogic.GameStateManagement
         [SerializeField]
         private GameEvent restartLevel = null;
 
-        private bool isGamePaused;
-        private float originalTimeScale;
+        [SerializeField]
+        private GameEvent _loadNextLevel = null;
+
+        [SerializeField]
+        private MusicPlayerProvider _musicPlayerProvider = null;
+
+        [SerializeField]
+        private AudioClip _backgroundMusic = null;
+
+        private bool _isGamePaused;
+        private float _originalTimeScale;
 
         public void StartGame()
         {
+            if (_musicPlayerProvider && _backgroundMusic)
+            {
+                if (!_musicPlayerProvider.MusicPlayer.IsPlaying)
+                {
+                    _musicPlayerProvider.MusicPlayer.PlayMusic(_backgroundMusic);
+                }
+            }
+
             Time.timeScale = 1f;
             gameStarted.Raise();
         }
@@ -53,17 +67,17 @@ namespace FridgeLogic.GameStateManagement
 
         public void TogglePause()
         {
-            isGamePaused = !isGamePaused;
+            _isGamePaused = !_isGamePaused;
 
-            if (isGamePaused)
+            if (_isGamePaused)
             {
-                originalTimeScale = Time.timeScale;
+                _originalTimeScale = Time.timeScale;
                 Time.timeScale = 0;
                 gamePaused.Raise();
             }
             else
             {
-                Time.timeScale = originalTimeScale;
+                Time.timeScale = _originalTimeScale;
                 gameUnpaused.Raise();
             }
         }
@@ -71,6 +85,12 @@ namespace FridgeLogic.GameStateManagement
         public void RestartLevel()
         {
             restartLevel.Raise();
+        }
+
+        public void PlayerEnteredPortal()
+        {
+            _musicPlayerProvider.MusicPlayer.StopMusic();
+            _loadNextLevel.Raise();
         }
 
         private void Awake()

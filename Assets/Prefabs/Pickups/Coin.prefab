@@ -228,6 +228,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onPickup: {fileID: 11400000, guid: 2ac891e13a157ec4dbd663a52873e5ff, type: 2}
+  _soundPlayerProvider: {fileID: 11400000, guid: f188abe001c545c45b3853f0be3a2a66,
+    type: 2}
+  _playOnPickup: {fileID: 8300000, guid: a082e32fada9aa848977244bd2f3de91, type: 3}
 --- !u!114 &1924251979662999751
 MonoBehaviour:
   m_ObjectHideFlags: 0

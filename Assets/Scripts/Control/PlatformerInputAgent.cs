@@ -7,16 +7,16 @@ namespace FridgeLogic.Control
     [RequireComponent(typeof(IMovement2D))]
     public class PlatformerInputAgent : MonoBehaviour
     {
-        private IMovement2D movement = null;
+        private IMovement2D _movement = null;
         private IMovement2D Movement
         {
             get
             {
-                if (movement == null)
+                if (_movement == null)
                 {
-                    movement = GetComponent<IMovement2D>();
+                    _movement = GetComponent<IMovement2D>();
                 }
-                return movement;
+                return _movement;
             }
         }
 

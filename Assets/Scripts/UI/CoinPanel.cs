@@ -9,8 +9,7 @@ namespace FridgeLogic.UI
         [SerializeField]
         private Text coinCount = null;
 
-        [SerializeField]
-        private GameObjectGroup coinGroup = null;
+        private int _coins = -1;
 
         public void CollectCoin()
         {
@@ -19,12 +18,13 @@ namespace FridgeLogic.UI
 
         private void UpdateCoinCount()
         {
-            coinCount.text = coinGroup.Count.ToString();
+            coinCount.text = (++_coins).ToString();
         }
 
         // Start is called before the first frame update
         private void Start()
         {
+            //_coins = coinGroup.Count;
             UpdateCoinCount();
         }
     }
