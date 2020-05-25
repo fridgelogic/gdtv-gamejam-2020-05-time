@@ -1,4 +1,4 @@
-﻿using FridgeLogic.ScriptableObjects.Groups;
+﻿using FridgeLogic.Pickups;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,26 +6,34 @@ namespace FridgeLogic.UI
 {
     public class CoinPanel : MonoBehaviour
     {
-        [SerializeField]
-        private Text coinCount = null;
+        [SerializeField] private Text _coinCount = null;
 
-        private int _coins = -1;
+        private int _coins;
 
-        public void CollectCoin()
+        public void OnCoinPickup(int coinValue)
         {
+            _coins += coinValue;
             UpdateCoinCount();
         }
 
         private void UpdateCoinCount()
         {
-            coinCount.text = (++_coins).ToString();
+            _coinCount.text = _coins.ToString("D2");
         }
 
-        // Start is called before the first frame update
         private void Start()
         {
-            //_coins = coinGroup.Count;
             UpdateCoinCount();
+        }
+
+        private void OnEnable()
+        {
+            Coin.CoinPickedUp += OnCoinPickup;
+        }
+
+        private void OnDisable()
+        {
+            Coin.CoinPickedUp -= OnCoinPickup;
         }
     }
 }

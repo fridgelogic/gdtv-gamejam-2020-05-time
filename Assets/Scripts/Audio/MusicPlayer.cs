@@ -6,6 +6,7 @@ namespace FridgeLogic.Audio
     public interface IMusicPlayer
     {
         bool IsPlaying { get; }
+        AudioClip CurrentAudioClip { get; }
 
         void PauseMusic();
         void PlayMusic(AudioClip audioClip);
@@ -22,6 +23,8 @@ namespace FridgeLogic.Audio
         private AudioSource AudioSource => _audioSource ?? (_audioSource = GetComponent<AudioSource>());
 
         public bool IsPlaying => AudioSource.isPlaying;
+
+        public AudioClip CurrentAudioClip => AudioSource.clip;
 
         public void PlayMusic(AudioClip audioClip)
         {

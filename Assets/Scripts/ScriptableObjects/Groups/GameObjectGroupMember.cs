@@ -4,22 +4,21 @@ namespace FridgeLogic.ScriptableObjects.Groups
 {
     public class GameObjectGroupMember : MonoBehaviour
     {
-        [SerializeField]
-        private GameObjectGroup gameObjectGroup = null;
+        [SerializeField] private GameObjectGroup _gameObjectGroup = null;
 
         private void Awake()
         {
-            Debug.Assert(gameObjectGroup);
+            Debug.Assert(_gameObjectGroup);
         }
 
         private void OnEnable()
         {
-            gameObjectGroup.Add(gameObject);
+            _gameObjectGroup.Add(gameObject);
         }
 
         private void OnDisable()
         {
-            gameObjectGroup.Remove(gameObject);
+            _gameObjectGroup.Remove(gameObject);
         }
     }
 }

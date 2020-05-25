@@ -1,56 +1,54 @@
-using FridgeLogic.ScriptableObjects.GameEvents;
 using FridgeLogic.ScriptableObjects.Providers;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FridgeLogic.Damage
 {
-    public class Health : MonoBehaviour, IHealth
+    public class Health : MonoBehaviour
     {
-        [SerializeField]
-        private float _maxHealth = 1f;
+        public event Action EntitiyDied;
+        public event Action EntityHit;
 
-        [SerializeField]
-        private GameObjectGameEvent _entityHit = null;
-
-        [SerializeField]
-        private GameObjectGameEvent _entityDied = null;
-
-        [SerializeField]
-        private SoundPlayerProvider _soundPlayerProvider = null;
-
-        [SerializeField]
-        private AudioClip _playOnDeath = null;
+        [SerializeField] private UnityEvent _entityDied = null;
+        [SerializeField] private UnityEvent _entityHit = null;
+        [SerializeField] private SoundPlayerProvider _soundPlayerProvider = null;
+        [SerializeField] private AudioClip _playOnDeath = null;
+        [SerializeField] private float _maxHealth = 1f;
 
         private float _currentHealth;
+        public float CurrentHealth => _currentHealth;
+        public float MaxHealth => _maxHealth;
 
         public void TakeDamage(float damage)
         {
-            _currentHealth = Mathf.Clamp(_currentHealth - damage, 0f, _maxHealth);
-            if (_currentHealth > 0f)
+            _currentHealth -= damage;
+            _entityHit?.Invoke();
+            EntityHit?.Invoke();
+            if (_currentHealth <= 0)
             {
-                _entityHit?.Raise(gameObject);
+                Die();
             }
-            else
-            {
-                if (_soundPlayerProvider && _playOnDeath)
-                {
-                    _soundPlayerProvider.SoundPlayer.PlaySound(_playOnDeath);
-                }
+        }
 
-                _entityDied?.Raise(gameObject);
-                Destroy(gameObject, 0.5f);
-                gameObject.SetActive(false);
+        [ContextMenu("Die")]
+        public void Die()
+        {
+            _currentHealth = 0;
+            if (_soundPlayerProvider && _playOnDeath)
+            {
+                _soundPlayerProvider.SoundPlayer.PlaySound(_playOnDeath);
             }
+
+            _entityDied?.Invoke();
+            EntitiyDied?.Invoke();
+            Destroy(gameObject, 0.5f);
+            gameObject.SetActive(false);
         }
 
         private void Awake()
         {
             _currentHealth = _maxHealth;
         }
-    }
-
-    public interface IHealth
-    {
-        void TakeDamage(float damage);
     }
 }

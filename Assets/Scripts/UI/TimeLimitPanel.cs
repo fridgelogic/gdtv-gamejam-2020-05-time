@@ -1,4 +1,4 @@
-﻿using FridgeLogic.ScriptableObjects.Values;
+﻿using FridgeLogic.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,28 +6,24 @@ namespace FridgeLogic.UI
 {
     public class TimeLimitPanel : MonoBehaviour
     {
-        [SerializeField]
-        private Text timeLimit = null;
+        [SerializeField] private Text _timeLimit = null;
+        [SerializeField] private TimeManager _timeManager = null;
+        
+        private int _lastTimeValue;
 
-        [SerializeField]
-        private IntValue currentTimeLimit = null;
-
-        [SerializeField]
-        private Color lowTimeRemainingColor = Color.red;
-
-        public void OnUpdateTimeLimit()
+        private void UpdateTimer()
         {
-            timeLimit.text = Mathf.Max(0, currentTimeLimit.Value).ToString();
+            var remainingTime = Mathf.CeilToInt(_timeManager.RemainingTime);
+            if (remainingTime != _lastTimeValue)
+            {
+                _lastTimeValue = remainingTime;
+                _timeLimit.text = remainingTime.ToString("D2");
+            }
         }
 
-        public void OnLowTimeRemaining()
+        private void Update()
         {
-            timeLimit.color = lowTimeRemainingColor;
-        }
-
-        private void Start()
-        {
-            OnUpdateTimeLimit();
+            UpdateTimer();
         }
     }
 }

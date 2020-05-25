@@ -1,4 +1,3 @@
-using FridgeLogic.ScriptableObjects.GameEvents;
 using FridgeLogic.ScriptableObjects.Providers;
 using UnityEngine;
 
@@ -43,9 +42,6 @@ namespace FridgeLogic.Movement
         [SerializeField]
         [Range(0, 0.8f)]
         private float stopJumpRate = 0.5f;
-
-        [SerializeField]
-        private GameEvent jumped = null;
 
         [SerializeField]
         private AudioClip _playerJump = null;
@@ -129,7 +125,6 @@ namespace FridgeLogic.Movement
                 jumpSentAt = float.MinValue;
                 velocity.y += jumpVelocity;
                 isJumping = true;
-                jumped?.Raise();
                 if (_soundPlayerProvider && _playerJump)
                 {
                     _soundPlayerProvider.SoundPlayer.PlaySound(_playerJump);
