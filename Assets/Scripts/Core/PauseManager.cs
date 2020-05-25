@@ -14,15 +14,13 @@ namespace FridgeLogic.Core
         [ContextMenu("Toggle Pause")]
         public void TogglePause()
         {
-            _isPaused = !_isPaused;
-
             if (_isPaused)
             {
-                PauseGame();
+                UnpauseGame();
             }
             else
             {
-                UnpauseGame();
+                PauseGame();
             }
         }
 
@@ -30,6 +28,7 @@ namespace FridgeLogic.Core
         public void PauseGame()
         {
             if (_isPaused) return;
+            _isPaused = true;
             Time.timeScale = 0;
             _gamePaused?.Invoke();
         }
@@ -38,6 +37,7 @@ namespace FridgeLogic.Core
         public void UnpauseGame()
         {
             if (!_isPaused) return;
+            _isPaused = false;
             Time.timeScale = _originalTimeScale;
             _gameUnpaused?.Invoke();
         }
@@ -51,6 +51,11 @@ namespace FridgeLogic.Core
                 Debug.LogWarning($"Running multiple instances of {typeof(PauseManager).Name} is not advised.");
             }
             #endif
+        }
+
+        private void OnDestroy()
+        {
+            UnpauseGame();
         }
     }
 }

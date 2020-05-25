@@ -22,6 +22,11 @@ namespace FridgeLogic.Core
             _levelManager.ReloadCurrentLevel(0.2f);
         }
 
+        public void OnPlayerPause()
+        {
+            _pauseManager.TogglePause();
+        }
+
         private void Start()
         {
             _player = Spawn();
@@ -49,7 +54,7 @@ namespace FridgeLogic.Core
 
             if (_playerControls)
             {
-                _playerControls.PlayerToggledPause += _pauseManager.TogglePause;
+                _playerControls.PlayerToggledPause += OnPlayerPause;
             }
         }
 
@@ -62,7 +67,7 @@ namespace FridgeLogic.Core
 
             if (_playerControls)
             {
-                _playerControls.PlayerToggledPause -= _pauseManager.TogglePause;
+                _playerControls.PlayerToggledPause -= OnPlayerPause;
             }
         }
 

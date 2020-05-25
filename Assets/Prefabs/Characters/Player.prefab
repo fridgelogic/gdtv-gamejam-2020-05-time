@@ -240,7 +240,18 @@ MonoBehaviour:
     m_ActionId: f11a3c65-f9a9-4671-8d0b-d57533500937
     m_ActionName: Player/Jump[/Keyboard/space]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4442789945374831985}
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: dc5ec850-0ebf-425a-afd6-7b6190041a26
     m_ActionName: Player/Pause[/Keyboard/escape]
   - m_PersistentCalls:
@@ -317,7 +328,6 @@ MonoBehaviour:
   jumpBufferTime: 0.2
   coyoteTime: 0.1
   stopJumpRate: 0.6
-  jumped: {fileID: 0}
   _playerJump: {fileID: 8300000, guid: 7984e76a99b96b04fa756d947fce5bd7, type: 3}
   _soundPlayerProvider: {fileID: 11400000, guid: f188abe001c545c45b3853f0be3a2a66,
     type: 2}

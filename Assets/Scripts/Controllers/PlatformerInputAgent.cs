@@ -58,7 +58,10 @@ namespace FridgeLogic.Control
         {
             if (context.performed)
             {
-                ProcessJump();
+                if (Time.timeScale > 0f)
+                {
+                    ProcessJump();
+                }
             }
             else if (context.canceled)
             {
@@ -70,17 +73,15 @@ namespace FridgeLogic.Control
         {
             if (context.performed)
             {
-                print("startrun8");
                 StartRun();
             }
             else if (context.canceled)
             {
-                print("stoprun");
                 StopRun();
             }
         }
 
-        public void OnPausePressed(InputAction.CallbackContext context)
+        public void OnPause(InputAction.CallbackContext context)
         {
             if (context.performed)
             {

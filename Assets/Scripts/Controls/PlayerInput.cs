@@ -54,7 +54,7 @@ namespace FrigeLogic.Controls
                 },
                 {
                     ""name"": ""Pause"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Button"",
                     ""id"": ""dc5ec850-0ebf-425a-afd6-7b6190041a26"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -62,7 +62,7 @@ namespace FrigeLogic.Controls
                 },
                 {
                     ""name"": ""ShiftMoveSpeed"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""e7f8984f-b51d-4099-a830-8dea2717c15d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
