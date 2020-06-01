@@ -1,4 +1,5 @@
 using FridgeLogic.ScriptableObjects.Providers;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,10 +10,20 @@ namespace FridgeLogic.Core
     {
         [SerializeField] private MusicPlayerProvider _musicPlayerProvider = null;
         [SerializeField] private AudioClip _backgroundMusic = null;
+        [SerializeField] private SceneReference _nextLevel = null;
 
         public void LoadLevel(SceneReference level, float delayInSeconds = 0f)
         {
             StartCoroutine(LoadSceneCoroutine(delayInSeconds, level));
+        }
+
+        public void LoadNextLevel()
+        {
+            if (_nextLevel == null)
+            {
+                throw new Exception($"{nameof(_nextLevel)}");
+            }
+            StartCoroutine(LoadSceneCoroutine(0f, _nextLevel));
         }
 
         public void ReloadCurrentLevel(float delayInSeconds = 0f)
@@ -27,6 +38,12 @@ namespace FridgeLogic.Core
             #else
                 Application.Quit();
             #endif
+        }
+
+        private IEnumerator LoadSceneCoroutine(int buildIndex)
+        {
+            var scene = SceneManager.GetSceneByBuildIndex(buildIndex);
+            yield return LoadSceneCoroutine(0f, scene.name);
         }
 
         private IEnumerator LoadSceneCoroutine(float timeToWait = 0f, string sceneName = "")
